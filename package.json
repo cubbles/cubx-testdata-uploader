@@ -1,0 +1,19 @@
+{
+  "name": "upload-asgard-docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "odin-upload-asgard-docs": "./bin/odin-upload-asgard-docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "couchdb-bootstrap": "^1.14.0",
+    "fs-extra": "^2.0.0",
+    "yargs": "^6.6.0"
+  }
+}

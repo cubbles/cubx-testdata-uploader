@@ -1,0 +1,707 @@
+{
+  "name": "ckeditor",
+  "groupId": "",
+  "version": "1.0.0",
+  "modelVersion": "9.1.1",
+  "docType": "webpackage",
+  "author": {
+    "name": "Edwin Gamboa",
+    "email": "edwingamboa355@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "man": [],
+  "artifacts": {
+    "apps": [
+      {
+        "artifactId": "docs",
+        "description": "Generated webpackage documentation.",
+        "runnables": [
+          {
+            "name": "docs",
+            "path": "/index.html",
+            "description": "Show the interface of this component."
+          }
+        ]
+      }
+    ],
+    "elementaryComponents": [
+      {
+        "artifactId": "cubx-ckeditor",
+        "description": "Component that allow the use of ckeditor within the Cubbles platform",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface of this component."
+          }
+        ],
+        "resources": [
+          "cubx-ckeditor.html"
+        ],
+        "dependencies": [
+          {
+            "webpackageId": "cubx.core.rte@2.1.0",
+            "artifactId": "cubxpolymer"
+          },
+          {
+            "webpackageId": "jquery-2.1.4@1.2.0",
+            "artifactId": "jquery"
+          },
+          {
+            "artifactId": "ckeditor-util"
+          }
+        ],
+        "slots": [
+          {
+            "slotId": "config",
+            "type": "object",
+            "description": "Config object for the ckeditor (see: http://docs.ckeditor.com/#!/api/CKEDITOR.config)",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "data",
+            "type": "string",
+            "description": "Editors content (raw text or html formatted text)",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "dataAfterChange",
+            "type": "string",
+            "description": "Data of the editor. This slot is set when the 'change' event is fired.",
+            "direction": [
+              "output"
+            ]
+          },
+          {
+            "slotId": "dataAfterBlur",
+            "type": "string",
+            "description": "Data of the editor. This slot is set when the editor loses focus",
+            "direction": [
+              "output"
+            ]
+          }
+        ]
+      }
+    ],
+    "compoundComponents": [
+      {
+        "artifactId": "cubx-ckeditor-basic",
+        "description": "Compound to wrap the basic package of ckeditor",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface and dataflow of this component."
+          }
+        ],
+        "resources": [
+          "css/cubx-ckeditor-basic.css"
+        ],
+        "dependencies": [
+          {
+            "artifactId": "cubx-ckeditor"
+          }
+        ],
+        "slots": [
+          {
+            "slotId": "config",
+            "type": "object",
+            "description": "Config object for the ckeditor (see: http://docs.ckeditor.com/#!/api/CKEDITOR.config)",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "data",
+            "type": "string",
+            "description": "Editors content (raw text or html formatted text)",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "dataAfterChange",
+            "type": "string",
+            "description": "Data of the editor. This slot is set when the 'change' event is fired.",
+            "direction": [
+              "output"
+            ]
+          },
+          {
+            "slotId": "dataAfterBlur",
+            "type": "string",
+            "description": "Data of the editor. This slot is set when the editor loses focus",
+            "direction": [
+              "output"
+            ]
+          }
+        ],
+        "members": [
+          {
+            "memberId": "ckeditor",
+            "artifactId": "cubx-ckeditor"
+          }
+        ],
+        "connections": [
+          {
+            "connectionId": "configCon",
+            "source": {
+              "slot": "config"
+            },
+            "destination": {
+              "memberIdRef": "ckeditor",
+              "slot": "config"
+            }
+          },
+          {
+            "connectionId": "dataCon",
+            "source": {
+              "slot": "data"
+            },
+            "destination": {
+              "memberIdRef": "ckeditor",
+              "slot": "data"
+            }
+          },
+          {
+            "connectionId": "dataAfterChangeCon",
+            "source": {
+              "memberIdRef": "ckeditor",
+              "slot": "dataAfterChange"
+            },
+            "destination": {
+              "slot": "dataAfterChange"
+            }
+          },
+          {
+            "connectionId": "dataAfterBlurCon",
+            "source": {
+              "memberIdRef": "ckeditor",
+              "slot": "dataAfterBlur"
+            },
+            "destination": {
+              "slot": "dataAfterBlur"
+            }
+          }
+        ],
+        "inits": [
+          {
+            "slot": "config",
+            "value": {
+              "toolbar": [
+                {
+                  "name": "basicstyles",
+                  "items": [
+                    "Bold",
+                    "Italic"
+                  ]
+                },
+                {
+                  "name": "paragraph",
+                  "items": [
+                    "NumberedList",
+                    "BulletedList",
+                    "-",
+                    "Outdent",
+                    "Indent"
+                  ]
+                },
+                {
+                  "name": "links",
+                  "items": [
+                    "Link",
+                    "Unlink"
+                  ]
+                },
+                {
+                  "name": "about",
+                  "items": [
+                    "About"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "artifactId": "cubx-ckeditor-standard",
+        "description": "Compound to wrap the standard package of ckeditor",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface and dataflow of this component."
+          }
+        ],
+        "resources": [
+          "css/cubx-ckeditor-standard.css"
+        ],
+        "dependencies": [
+          {
+            "artifactId": "cubx-ckeditor"
+          }
+        ],
+        "slots": [
+          {
+            "slotId": "config",
+            "type": "object",
+            "description": "Config object for the ckeditor (see: http://docs.ckeditor.com/#!/api/CKEDITOR.config)",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "data",
+            "type": "string",
+            "description": "Editors content (raw text or html formatted text)",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "dataAfterChange",
+            "type": "string",
+            "description": "Data of the editor. This slot is set when the 'change' event is fired.",
+            "direction": [
+              "output"
+            ]
+          },
+          {
+            "slotId": "dataAfterBlur",
+            "type": "string",
+            "description": "Data of the editor. This slot is set when the editor loses focus",
+            "direction": [
+              "output"
+            ]
+          }
+        ],
+        "members": [
+          {
+            "memberId": "ckeditor",
+            "artifactId": "cubx-ckeditor"
+          }
+        ],
+        "connections": [
+          {
+            "connectionId": "configCon",
+            "source": {
+              "slot": "config"
+            },
+            "destination": {
+              "memberIdRef": "ckeditor",
+              "slot": "config"
+            }
+          },
+          {
+            "connectionId": "dataCon",
+            "source": {
+              "slot": "data"
+            },
+            "destination": {
+              "memberIdRef": "ckeditor",
+              "slot": "data"
+            }
+          },
+          {
+            "connectionId": "dataAfterChangeCon",
+            "source": {
+              "memberIdRef": "ckeditor",
+              "slot": "dataAfterChange"
+            },
+            "destination": {
+              "slot": "dataAfterChange"
+            }
+          },
+          {
+            "connectionId": "dataAfterBlurCon",
+            "source": {
+              "memberIdRef": "ckeditor",
+              "slot": "dataAfterBlur"
+            },
+            "destination": {
+              "slot": "dataAfterBlur"
+            }
+          }
+        ],
+        "inits": [
+          {
+            "slot": "config",
+            "value": {
+              "toolbar": [
+                {
+                  "name": "clipboard",
+                  "items": [
+                    "Cut",
+                    "Copy",
+                    "Paste",
+                    "PasteText",
+                    "PasteFromWord",
+                    "-",
+                    "Undo",
+                    "Redo"
+                  ]
+                },
+                {
+                  "name": "editing",
+                  "items": [
+                    "Scayt"
+                  ]
+                },
+                {
+                  "name": "links",
+                  "items": [
+                    "Link",
+                    "Unlink",
+                    "Anchor"
+                  ]
+                },
+                {
+                  "name": "insert",
+                  "items": [
+                    "Image",
+                    "Table",
+                    "HorizontalRule",
+                    "SpecialChar"
+                  ]
+                },
+                {
+                  "name": "tools",
+                  "items": [
+                    "Maximize"
+                  ]
+                },
+                {
+                  "name": "document",
+                  "items": [
+                    "Source"
+                  ]
+                },
+                "/",
+                {
+                  "name": "basicstyles",
+                  "items": [
+                    "Bold",
+                    "Italic",
+                    "Strike",
+                    "-",
+                    "RemoveFormat"
+                  ]
+                },
+                {
+                  "name": "paragraph",
+                  "items": [
+                    "NumberedList",
+                    "BulletedList",
+                    "-",
+                    "Outdent",
+                    "Indent",
+                    "-",
+                    "Blockquote"
+                  ]
+                },
+                {
+                  "name": "styles",
+                  "items": [
+                    "Styles",
+                    "Format"
+                  ]
+                },
+                {
+                  "name": "about",
+                  "items": [
+                    "About"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "artifactId": "cubx-ckeditor-full",
+        "description": "Compound to wrap the full package of ckeditor",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface and dataflow of this component."
+          }
+        ],
+        "resources": [
+          "css/cubx-ckeditor-full.css"
+        ],
+        "dependencies": [
+          {
+            "artifactId": "cubx-ckeditor"
+          }
+        ],
+        "slots": [
+          {
+            "slotId": "config",
+            "type": "object",
+            "description": "Config object for the ckeditor (see: http://docs.ckeditor.com/#!/api/CKEDITOR.config)",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "data",
+            "type": "string",
+            "description": "Editors content (raw text or html formatted text)",
+            "direction": [
+              "input"
+            ]
+          },
+          {
+            "slotId": "dataAfterChange",
+            "type": "string",
+            "description": "Data of the editor. This slot is set when the 'change' event is fired.",
+            "direction": [
+              "output"
+            ]
+          },
+          {
+            "slotId": "dataAfterBlur",
+            "type": "string",
+            "description": "Data of the editor. This slot is set when the editor loses focus",
+            "direction": [
+              "output"
+            ]
+          }
+        ],
+        "members": [
+          {
+            "memberId": "ckeditor",
+            "artifactId": "cubx-ckeditor"
+          }
+        ],
+        "connections": [
+          {
+            "connectionId": "configCon",
+            "source": {
+              "slot": "config"
+            },
+            "destination": {
+              "memberIdRef": "ckeditor",
+              "slot": "config"
+            }
+          },
+          {
+            "connectionId": "dataCon",
+            "source": {
+              "slot": "data"
+            },
+            "destination": {
+              "memberIdRef": "ckeditor",
+              "slot": "data"
+            }
+          },
+          {
+            "connectionId": "dataAfterChangeCon",
+            "source": {
+              "memberIdRef": "ckeditor",
+              "slot": "dataAfterChange"
+            },
+            "destination": {
+              "slot": "dataAfterChange"
+            }
+          },
+          {
+            "connectionId": "dataAfterBlurCon",
+            "source": {
+              "memberIdRef": "ckeditor",
+              "slot": "dataAfterBlur"
+            },
+            "destination": {
+              "slot": "dataAfterBlur"
+            }
+          }
+        ],
+        "inits": [
+          {
+            "slot": "config",
+            "value": {
+              "toolbar": [
+                {
+                  "name": "document",
+                  "items": [
+                    "Source",
+                    "-",
+                    "Save",
+                    "NewPage",
+                    "Preview",
+                    "Print",
+                    "-",
+                    "Templates"
+                  ]
+                },
+                {
+                  "name": "clipboard",
+                  "items": [
+                    "Cut",
+                    "Copy",
+                    "Paste",
+                    "PasteText",
+                    "PasteFromWord",
+                    "-",
+                    "Undo",
+                    "Redo"
+                  ]
+                },
+                {
+                  "name": "editing",
+                  "items": [
+                    "Find",
+                    "Replace",
+                    "-",
+                    "SelectAll",
+                    "-",
+                    "Scayt"
+                  ]
+                },
+                {
+                  "name": "forms",
+                  "items": [
+                    "Form",
+                    "Checkbox",
+                    "Radio",
+                    "TextField",
+                    "Textarea",
+                    "Select",
+                    "Button",
+                    "ImageButton",
+                    "HiddenField"
+                  ]
+                },
+                "/",
+                {
+                  "name": "basicstyles",
+                  "items": [
+                    "Bold",
+                    "Italic",
+                    "Underline",
+                    "Strike",
+                    "Subscript",
+                    "Superscript",
+                    "-",
+                    "CopyFormatting",
+                    "RemoveFormat"
+                  ]
+                },
+                {
+                  "name": "paragraph",
+                  "items": [
+                    "NumberedList",
+                    "BulletedList",
+                    "-",
+                    "Outdent",
+                    "Indent",
+                    "-",
+                    "Blockquote",
+                    "CreateDiv",
+                    "-",
+                    "JustifyLeft",
+                    "JustifyCenter",
+                    "JustifyRight",
+                    "JustifyBlock",
+                    "-",
+                    "BidiLtr",
+                    "BidiRtl",
+                    "Language"
+                  ]
+                },
+                {
+                  "name": "links",
+                  "items": [
+                    "Link",
+                    "Unlink",
+                    "Anchor"
+                  ]
+                },
+                {
+                  "name": "insert",
+                  "items": [
+                    "Image",
+                    "Flash",
+                    "Table",
+                    "HorizontalRule",
+                    "Smiley",
+                    "SpecialChar",
+                    "PageBreak",
+                    "Iframe"
+                  ]
+                },
+                "/",
+                {
+                  "name": "styles",
+                  "items": [
+                    "Styles",
+                    "Format",
+                    "Font",
+                    "FontSize"
+                  ]
+                },
+                {
+                  "name": "colors",
+                  "items": [
+                    "TextColor",
+                    "BGColor"
+                  ]
+                },
+                {
+                  "name": "tools",
+                  "items": [
+                    "Maximize",
+                    "ShowBlocks"
+                  ]
+                },
+                {
+                  "name": "about",
+                  "items": [
+                    "About"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "utilities": [
+      {
+        "artifactId": "ckeditor-util",
+        "description": "Utility to provide the ckeditor v 4.6.1",
+        "resources": [
+          "ckeditor.js"
+        ],
+        "dependencies": []
+      }
+    ]
+  }
+}

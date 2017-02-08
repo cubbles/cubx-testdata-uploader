@@ -1,0 +1,1 @@
+Uploader for manifest.webpackeges in store (odin-for-asgard)

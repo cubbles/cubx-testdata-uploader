@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var inquirer = require('inquirer');
 var FileGenerator = require('./lib/file-generator.js');
 // var CouchUploader = require('./lib/couch-uploader.js');
 var Uploader = require('cubx-webpackage-uploader');
@@ -34,6 +35,45 @@ fs.stat(sourcePath, (error, stats) => {
     // var couchUploader = new CouchUploader(basicUrl, couchDocsPath);
     var uploader = new Uploader();
     var fileGenerator = new FileGenerator(sourcePath, couchDocsPath, store);
+
+    var promise = fileGenerator.createUploadStructure();
+    promise.then(
+      (values) => {
+        // upload all webpacakges
+        inquirer.prompt([
+          {
+            name: 'user',
+            type: 'input',
+            message: 'username:',
+            validate: function (input) {
+              return (typeof input !== 'undefined' && input.length > 0);
+            }
+          },
+          {
+            name: 'password',
+            type: 'password',
+            message: 'password:',
+            validate: function (input) {
+              return (typeof input !== 'undefined' && input.length > 0);
+            }
+          }
+        ]).then(function (response) {
+          let i = 0;
+          // values.forEach(path => {
+          let credentialConfig = {
+            user: response.user,
+            password: response.password
+          };
+          doUpload(values, i, credentialConfig);
+        });
+      }).catch(err => {
+        console.error(err);
+      });
+  } else {
+    console.error('The sourcePath not a directory.', sourcePath);
+  }
+
+  function doUpload (pathArray, i, credentialConfig) {
     var uploadConfig = {
       source: '',
       target: {
@@ -46,24 +86,18 @@ fs.stat(sourcePath, (error, stats) => {
     if (proxy && proxy.length > 0) {
       uploadConfig.target.proxy = proxy;
     }
-    var promise = fileGenerator.createUploadStructure();
-    promise.then(
-      (values) => {
-        // upload all webpacakges
-        values.forEach(path => {
-          uploadConfig.source = path;
-          uploader.uploadSingleWebpackage(uploadConfig, function (err, success) {
-            if (err) {
-              console.error(err);
-            } else {
-              console.log('Uploaded successed webpackage from ' + path);
-            }
-          });
-        });
-      }).catch(err => {
+    uploadConfig.source = pathArray[i];
+    uploadConfig.access_credentials = credentialConfig;
+    uploader.uploadSingleWebpackage(uploadConfig, function (err, success) {
+      if (err) {
         console.error(err);
-      });
-  } else {
-    console.error('The sourcePath not a directory.', sourcePath);
+      } else {
+        console.log('Uploaded successed webpackage from ' + path);
+        i++;
+        if (pathArray[i]) {
+          doUpload(pathArray, i, credentialConfig);
+        }
+      }
+    });
   }
 });

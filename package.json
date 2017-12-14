@@ -13,8 +13,9 @@
   "license": "MIT",
   "dependencies": {
     "couchdb-bootstrap": "^1.14.0",
+    "cubx-webpackage-uploader": "^3.3.2",
     "fs-extra": "^5.0.0",
-    "yargs": "^6.6.0",
-    "cubx-webpackage-uploader": "^3.3.2"
+    "inquirer": "^4.0.1",
+    "yargs": "^6.6.0"
   }
 }

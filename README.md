@@ -18,3 +18,5 @@ Use the The following options:
 * -u,--storeUrl - The url of the store like https://cubbles.world/odin-test 
 * -s,--sourcePath - The source path. Place the manifest files as *.json files in this folder.
 * -p,--proxy - the proxy url, if use behind a proxy   
+
+Note: The source path should contains just the manifest file(s), because all json files assumed as a manifest file. 

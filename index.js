@@ -39,7 +39,8 @@ fs.stat(sourcePath, (error, stats) => {
     var promise = fileGenerator.createUploadStructure();
     promise.then(
       (values) => {
-        // upload all webpacakges
+        // upload all webpackges
+        console.log('Please log in for upload to CubblesBase:');
         inquirer.prompt([
           {
             name: 'user',
@@ -92,7 +93,7 @@ fs.stat(sourcePath, (error, stats) => {
       if (err) {
         console.error(err);
       } else {
-        console.log('Uploaded successed webpackage from ' + path);
+        console.log('Uploaded successed webpackage from ' + pathArray[i]);
         i++;
         if (pathArray[i]) {
           doUpload(pathArray, i, credentialConfig);
